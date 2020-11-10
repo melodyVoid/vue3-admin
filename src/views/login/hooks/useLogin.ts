@@ -1,11 +1,13 @@
 import { reactive } from 'vue'
 import { useForm } from '@ant-design-vue/use'
 import { message } from 'ant-design-vue'
+import { useStore } from 'vuex'
 export interface LoginFormData {
   account: string
   password: string
 }
 export default function useLogin() {
+  const store = useStore()
   const loginForm = reactive<LoginFormData>({
     account: '',
     password: '',
@@ -32,6 +34,7 @@ export default function useLogin() {
     try {
       await validate()
       // 发起请求
+      await store.dispatch('user/Login')
     } catch (error) {
       console.log(error)
       message.warning('表单填写有误，请检查')
@@ -40,7 +43,6 @@ export default function useLogin() {
 
   return {
     loginForm,
-    rules,
     validateInfos,
     handleSubmit,
   }

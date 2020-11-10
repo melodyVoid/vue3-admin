@@ -1,10 +1,8 @@
 <template>
   <div class="login-wrapper">
     <a-form
-      :model="loginForm"
       layout="vertical"
       :wrapper-col="{ span: 6, offset: 9 }"
-      :rules="rules"
       class="login-form"
     >
       <a-form-item name="account" v-bind="validateInfos.account">
@@ -41,7 +39,7 @@
 export { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import useLogin from './hooks/useLogin'
 
-export const { loginForm, rules, validateInfos, handleSubmit } = useLogin()
+export const { loginForm, validateInfos, handleSubmit } = useLogin()
 </script>
 <style lang="scss" scoped>
 .login-wrapper {

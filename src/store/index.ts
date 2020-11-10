@@ -1,8 +1,10 @@
 import { createStore } from 'vuex'
-
+import user, { UserState } from './modules/user'
+export interface RootState {
+  user: UserState
+}
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: {
+    user,
+  },
 })
