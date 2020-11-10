@@ -1,12 +1,13 @@
 <template>
   <div class="login-wrapper">
     <a-form
-      :form="loginForm"
+      :model="loginForm"
       layout="vertical"
       :wrapper-col="{ span: 6, offset: 9 }"
+      :rules="rules"
       class="login-form"
     >
-      <a-form-item>
+      <a-form-item name="account" v-bind="validateInfos.account">
         <a-input
           v-model:value="loginForm.account"
           size="large"
@@ -17,9 +18,9 @@
           </template>
         </a-input>
       </a-form-item>
-      <a-form-item>
+      <a-form-item name="password" v-bind="validateInfos.password">
         <a-input-password
-          v-model="loginForm.password"
+          v-model:value="loginForm.password"
           size="large"
           placeholder="请输入密码"
         >
@@ -29,7 +30,9 @@
         </a-input-password>
       </a-form-item>
       <a-form-item>
-        <a-button size="large" type="primary" block>登录</a-button>
+        <a-button size="large" type="primary" block @click="handleSubmit"
+          >登录</a-button
+        >
       </a-form-item>
     </a-form>
   </div>
@@ -38,7 +41,7 @@
 export { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import useLogin from './hooks/useLogin'
 
-export const { loginForm } = useLogin()
+export const { loginForm, rules, validateInfos, handleSubmit } = useLogin()
 </script>
 <style lang="scss" scoped>
 .login-wrapper {
