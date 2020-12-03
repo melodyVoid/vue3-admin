@@ -13,6 +13,8 @@ import Footer from './Footer.vue'
 main {
   background: #f0f2f5;
   padding: 20px;
+  /* 固定 navbar */
+  overflow-y: scroll;
 }
 .main-router-view {
   background: #fff;
