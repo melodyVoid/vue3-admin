@@ -36,10 +36,10 @@
   </div>
 </template>
 <script setup lang="ts">
-export { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import useLogin from './hooks/useLogin'
 
-export const { loginForm, validateInfos, handleSubmit } = useLogin()
+const { loginForm, validateInfos, handleSubmit } = useLogin()
 </script>
 <style lang="scss" scoped>
 .login-wrapper {
