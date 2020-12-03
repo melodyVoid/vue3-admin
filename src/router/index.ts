@@ -19,12 +19,14 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Layout',
     component: () =>
       import(/* webpackChunkName: "layout" */ '@/layout/index.vue'),
+    meta: { title: '首页父' },
     children: [
       {
         path: '',
         name: 'Dashboard',
         component: () =>
           import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
+        meta: { title: '首页' },
       },
     ],
   },

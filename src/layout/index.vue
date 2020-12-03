@@ -2,18 +2,18 @@
   <div class="layout">
     <Logo></Logo>
     <Navbar></Navbar>
-    <div class="sidebar">sidebar</div>
+    <Sidebar></Sidebar>
     <Main></Main>
   </div>
 </template>
 <script setup>
 import Logo from './components/Logo.vue'
 import Navbar from './components/Navbar.vue'
+import Sidebar from './components/Sidebar.vue'
 import Main from './components/Main.vue'
 </script>
 <style lang="scss" scoped>
 .layout {
-  // background: red;
   height: 100vh;
   display: grid;
   grid-template-columns: 200px 1fr;
