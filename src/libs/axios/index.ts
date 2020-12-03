@@ -1,6 +1,7 @@
 import { message, notification } from 'ant-design-vue'
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import store from '@/store'
+import useToken from '../../hooks/useToken'
 
 export interface ResponseData {
   message: string
@@ -33,8 +34,7 @@ service.interceptors.response.use(
   (error: AxiosError<ResponseData>) => {
     if (error.response) {
       const data = error.response?.data
-      const token = store.state.user.token
-
+      const token = useToken()
       switch (error.response.status) {
         case 403:
           notification.error({
@@ -64,7 +64,7 @@ service.interceptors.response.use(
 )
 
 service.interceptors.request.use((config: AxiosRequestConfig) => {
-  const token = store.state.user.token
+  const token = useToken()
   // 如果有 token，将 token 存在请求头里面
   if (token) {
     config.headers['Access-Token'] = token

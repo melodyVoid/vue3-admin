@@ -1,9 +1,10 @@
-import { getToken, removeToken } from '@/utils/local-stroage'
+import { getToken, setToken, removeToken } from '@/utils/local-stroage'
 import { MutationTree, Module, ActionTree } from 'vuex'
 import { RootState } from '../index'
-import { LoginFormData } from '../../views/login/hooks/useLogin'
-import { login, getUserInfo } from '../../api/login'
-
+import { LoginFormData } from '@/views/login/hooks/useLogin'
+import { login, getUserInfo } from '@/api/login'
+import router from '@/router'
+import { message } from 'ant-design-vue'
 export interface UserInfo {
   name: string
 }
@@ -11,6 +12,7 @@ export interface UserState {
   userInfo: UserInfo
   token: string
 }
+
 const state: UserState = {
   userInfo: {
     name: '',
@@ -32,17 +34,22 @@ const actions: ActionTree<UserState, RootState> = {
     try {
       console.log(payload)
       const { token } = await login(payload)
+      console.log(token, 'token')
       commit('SET_TOKEN', token)
+      setToken(token)
+      router.push('/')
     } catch (error) {
       console.log(error)
     }
   },
-  async GetInfo({ commit }) {
+  async GetInfo({ commit, dispatch }) {
     try {
       const userInfo = await getUserInfo()
       commit('SET_USER_INFO', userInfo)
     } catch (error) {
       console.log(error)
+      message.error('验证失败，请重新登录')
+      dispatch('Logout')
     }
   },
   async Logout({ commit }) {

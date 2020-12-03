@@ -21,6 +21,10 @@ export function login(data: LoginFormData) {
  * @date 2020/11/10
  */
 export function getUserInfo() {
+  console.log(1)
+  return Promise.resolve({
+    name: '薄涛',
+  })
   return request({
     url: '/account',
     method: 'get',
