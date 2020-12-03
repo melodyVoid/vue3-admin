@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     首页
   </div>
 </template>
@@ -12,4 +12,8 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+  // background: #fff;
+}
+</style>
