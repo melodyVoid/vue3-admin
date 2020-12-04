@@ -9,6 +9,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+  store.commit('app/SET_SPINNING', true) // 切换路由时打开 spinning
   // 获取 store 里的 token
   const token = useToken()
   if (token) {
@@ -31,6 +32,10 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/login' })
     }
   }
+})
+
+router.afterEach(() => {
+  store.commit('app/SET_SPINNING', false)
 })
 
 export default router
