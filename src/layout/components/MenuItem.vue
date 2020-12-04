@@ -8,11 +8,11 @@
       <MenuItem
         :menu="submenu"
         v-for="submenu of menu.children"
-        :key="submenu.path"
+        :key="submenu.name"
       ></MenuItem>
     </a-sub-menu>
   </template>
-  <a-menu-item v-else :key="menu.path">
+  <a-menu-item v-else :key="menu.name">
     <PieChartOutlined />
     <span>{{ menu.meta?.title }}</span>
   </a-menu-item>

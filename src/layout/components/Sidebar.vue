@@ -7,15 +7,15 @@
       v-model:selectedKeys="currentRoute"
       @click="handleClickMenu"
     >
-      <MenuItem v-for="menu of routes" :key="menu.path" :menu="menu"></MenuItem>
+      <MenuItem v-for="menu of routes" :key="menu.name" :menu="menu"></MenuItem>
     </a-menu>
   </div>
 </template>
 <script setup lang="ts">
 import MenuItem from './MenuItem.vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import { ref, computed, useCssVars } from 'vue'
+import { ref, computed, useCssVars, watch } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -33,6 +33,9 @@ const filterHiddenRoutes = (item: RouteRecordRaw) => {
     return true
   }
 }
+/**
+ * 过滤后的路由表，用于渲染侧边栏
+ */
 const routes = router.options.routes
   // 过滤掉登录页等其他 layout 之外的路由
   .filter(item => item.children?.length > 0)
@@ -40,11 +43,21 @@ const routes = router.options.routes
   .filter(filterHiddenRoutes)
 console.log(routes)
 
+/**
+ * 高亮当前菜单
+ */
+const route = useRoute()
 const currentRoute = ref([])
+
+watch(() => route.fullPath, () => {
+  currentRoute.value = [route.name]
+}, { immediate: true })
+
+/**
+ * 点击菜单跳转路由
+ */
 const handleClickMenu = (menuInfo) => {
-  // keyPath 的格式：["basic", "/table"]，这个用 ... 把数组拷贝了一份避免 reverse 修改原数组，产生副作用
-  const path = [...menuInfo.keyPath].reverse().join('/')
-  router.push({ path })
+  router.push({ name: menuInfo.key })
 }
 
 /**
