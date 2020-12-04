@@ -6,7 +6,7 @@
     <Footer />
   </main>
 </template>
-<script setup>
+<script setup lang="ts">
 import Footer from './Footer.vue'
 </script>
 <style lang="scss" scoped>

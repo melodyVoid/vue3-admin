@@ -6,7 +6,7 @@
     </div>
   </footer>
 </template>
-<script setup>
+<script setup lang="ts">
 import { CopyrightCircleOutlined } from '@ant-design/icons-vue'
 </script>
 <style lang="scss" scoped>

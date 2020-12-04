@@ -5,7 +5,7 @@
     </a-menu>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import MenuItem from './MenuItem.vue'
 import { useRouter } from 'vue-router'
 
