@@ -1,7 +1,13 @@
 <template>
   <div>
-    <a-menu mode="inline" theme="dark" :inline-collapsed="collapsed">
-      <MenuItem v-for="menu of routes" :key="menu.name" :menu="menu"></MenuItem>
+    <a-menu
+      mode="inline"
+      theme="dark"
+      :inline-collapsed="collapsed"
+      v-model:selectedKeys="currentRoute"
+      @click="handleClickMenu"
+    >
+      <MenuItem v-for="menu of routes" :key="menu.path" :menu="menu"></MenuItem>
     </a-menu>
   </div>
 </template>
@@ -29,7 +35,14 @@ const routes = router.options.routes
   // 递归过滤掉 meta.hidden === true 的路由
   .filter(filterHiddenRoutes)
 console.log(routes)
+
+const currentRoute = ref([])
 const collapsed = ref<boolean>(false)
+const handleClickMenu = (menuInfo) => {
+  // keyPath 的格式：["basic", "/table"]，这个用 ... 把数组拷贝了一份避免 reverse 修改原数组，产生副作用
+  const path = [...menuInfo.keyPath].reverse().join('/')
+  router.push({ path })
+}
 </script>
 <style lang="scss" scoped>
 .ant-menu-dark.ant-menu-root.ant-menu {
