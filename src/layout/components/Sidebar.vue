@@ -5,6 +5,7 @@
       theme="dark"
       :inline-collapsed="collapsed"
       v-model:selectedKeys="currentRoute"
+      v-model:openKeys="openKeys"
       @click="handleClickMenu"
     >
       <MenuItem v-for="menu of routes" :key="menu.name" :menu="menu"></MenuItem>
@@ -47,10 +48,12 @@ console.log(routes)
  * 高亮当前菜单
  */
 const route = useRoute()
-const currentRoute = ref([])
+const currentRoute = ref<string[]>([])
+const openKeys = ref<string[]>([])
 
 watch(() => route.fullPath, () => {
   currentRoute.value = [route.name]
+  openKeys.value = [route.matched[0]?.name]
 }, { immediate: true })
 
 /**
