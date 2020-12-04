@@ -1,11 +1,15 @@
 <template>
   <template v-if="menu.children && menu.children.length > 0">
-    <a-sub-menu v-for="submenu of menu.children" :key="submenu.name">
+    <a-sub-menu>
       <template #title>
         <MailOutlined />
         <span>{{ menu.meta?.title }}</span>
       </template>
-      <MenuItem :menu="submenu"></MenuItem>
+      <MenuItem
+        :menu="submenu"
+        v-for="submenu of menu.children"
+        :key="submenu.name"
+      ></MenuItem>
     </a-sub-menu>
   </template>
   <a-menu-item v-else :key="menu.name">
