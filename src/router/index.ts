@@ -1,36 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import useToken from '../hooks/useToken'
 import store from '@/store'
-
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'Home',
-    redirect: '/home',
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () =>
-      import(/* webpackChunkName: "login" */ '../views/login/index.vue'),
-  },
-  {
-    path: '/home',
-    name: 'Layout',
-    component: () =>
-      import(/* webpackChunkName: "layout" */ '@/layout/index.vue'),
-    meta: { title: '首页父' },
-    children: [
-      {
-        path: '',
-        name: 'Dashboard',
-        component: () =>
-          import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
-        meta: { title: '首页' },
-      },
-    ],
-  },
-]
+import routes from './routes'
 
 const router = createRouter({
   history: createWebHashHistory(),

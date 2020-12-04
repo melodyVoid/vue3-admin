@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-menu mode="inline" theme="dark">
+    <a-menu mode="inline" theme="dark" :inline-collapsed="collapsed">
       <MenuItem v-for="menu of routes" :key="menu.name" :menu="menu"></MenuItem>
     </a-menu>
   </div>
@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import MenuItem from './MenuItem.vue'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const router = useRouter()
 console.log(router.options.routes)
@@ -15,6 +16,7 @@ console.log(router.options.routes)
 const routes = router.options.routes.filter(
   item => item.children && item.children.length > 0
 )
+const collapsed = ref<boolean>(false)
 </script>
 <style lang="scss" scoped>
 .ant-menu-dark.ant-menu-root.ant-menu {
