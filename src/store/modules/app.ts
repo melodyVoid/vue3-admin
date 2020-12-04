@@ -8,12 +8,12 @@ export interface AppState {
   /** 切换路由时的 loading */
   spinning: boolean
   /** 菜单是否折叠 */
-  collapse: boolean
+  collapsed: boolean
 }
 
 const state: AppState = {
   spinning: false,
-  collapse: false,
+  collapsed: false,
 }
 
 const mutations: MutationTree<AppState> = {
@@ -21,7 +21,7 @@ const mutations: MutationTree<AppState> = {
     state.spinning = spinning
   },
   TOGGLE_COLLAPSE(state: AppState) {
-    state.collapse = !state.collapse
+    state.collapsed = !state.collapsed
   },
 }
 const app: Module<AppState, RootState> = {

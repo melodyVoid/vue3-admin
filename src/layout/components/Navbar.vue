@@ -1,6 +1,11 @@
 <template>
   <div class="navbar">
-    <MenuFoldOutlined :style="{ fontSize: '20px' }" />
+    <MenuFoldOutlined
+      class="toggle"
+      :class="[collapsed ? 'collapsed' : '']"
+      @click="toggle"
+    />
+    <span>{{ collapsed }}</span>
     <div class="user-info">
       <div class="avatar">
         <a-avatar
@@ -17,6 +22,9 @@ import { useStore } from 'vuex'
 import { computed } from 'vue'
 const store = useStore()
 const userName = computed<string>(() => store.state.user.userInfo.name)
+
+const collapsed = computed<boolean>(() => store.state.app.collapsed)
+const toggle = () => store.commit('app/TOGGLE_COLLAPSE')
 </script>
 <style lang="scss" scoped>
 .navbar {
@@ -29,5 +37,13 @@ const userName = computed<string>(() => store.state.user.userInfo.name)
 .user-info {
   display: flex;
   align-items: center;
+}
+.toggle {
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform ease 0.5s;
+}
+.collapsed {
+  transform: rotate(180deg);
 }
 </style>
