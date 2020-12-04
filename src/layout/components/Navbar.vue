@@ -5,7 +5,6 @@
       :class="[collapsed ? 'collapsed' : '']"
       @click="toggle"
     />
-    <span>{{ collapsed }}</span>
     <div class="user-info">
       <div class="avatar">
         <a-avatar
@@ -41,7 +40,7 @@ const toggle = () => store.commit('app/TOGGLE_COLLAPSE')
 .toggle {
   font-size: 20px;
   cursor: pointer;
-  transition: transform ease 0.5s;
+  transition: transform ease 0.4s;
 }
 .collapsed {
   transform: rotate(180deg);
