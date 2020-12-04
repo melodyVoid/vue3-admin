@@ -16,7 +16,7 @@
 import MenuItem from './MenuItem.vue'
 import { useRouter, useRoute } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import { ref, computed, useCssVars, watch } from 'vue'
+import { ref, computed, useCssVars, watch, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -42,7 +42,6 @@ const routes = router.options.routes
   .filter(item => item.children?.length > 0)
   // 递归过滤掉 meta.hidden === true 的路由
   .filter(filterHiddenRoutes)
-console.log(routes)
 
 /**
  * 高亮当前菜单
@@ -55,6 +54,14 @@ watch(() => route.fullPath, () => {
   currentRoute.value = [route.name]
   openKeys.value = [route.matched[0]?.name]
 }, { immediate: true })
+
+
+/**
+ * 折叠菜单时，不展开子菜单
+ */
+watchEffect(() => {
+  openKeys.value = collapsed.value ? [] : [route.matched[0]?.name]
+})
 
 /**
  * 点击菜单跳转路由
