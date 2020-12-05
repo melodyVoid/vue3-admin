@@ -15,5 +15,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container {
   // background: #fff;
+  height: 1000px;
 }
 </style>

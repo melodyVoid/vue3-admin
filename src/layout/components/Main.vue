@@ -1,12 +1,12 @@
 <template>
-  <a-spin :spinning="spinning" tip="加载中..." size="large">
-    <main>
+  <main>
+    <a-spin :spinning="spinning" tip="加载中..." size="large">
       <div class="main-router-view">
         <router-view></router-view>
       </div>
       <Footer />
-    </main>
-  </a-spin>
+    </a-spin>
+  </main>
 </template>
 <script setup lang="ts">
 import Footer from './Footer.vue'

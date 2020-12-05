@@ -49,18 +49,26 @@ const routes = router.options.routes
 const route = useRoute()
 const currentRoute = ref<string[]>([])
 const openKeys = ref<string[]>([])
+const preOpenKeys = ref<string>([])
 
 watch(() => route.fullPath, () => {
   currentRoute.value = [route.name]
-  openKeys.value = [route.matched[0]?.name]
+  if (openKeys.value.length === 0) {
+    openKeys.value =  [route.matched[0]?.name]
+  }
 }, { immediate: true })
 
-
+/**
+ * 展开子菜单时，监听 openKeys，存入 preOpenKeys，用于折叠侧边栏再展开时复原之前的展开菜单
+ */
+watch(openKeys, (value, oldValue) => {
+  preOpenKeys.value = oldValue
+})
 /**
  * 折叠菜单时，不展开子菜单
  */
-watchEffect(() => {
-  openKeys.value = collapsed.value ? [] : [route.matched[0]?.name]
+watch(collapsed, value => {
+  openKeys.value = value ? [] : preOpenKeys.value
 })
 
 /**
