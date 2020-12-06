@@ -18,6 +18,7 @@ import { useRouter, useRoute } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import { ref, computed, useCssVars, watch, watchEffect } from 'vue'
 import { useStore } from 'vuex'
+type RouteRecordName = string | symbol
 
 const store = useStore()
 const collapsed = computed(() => store.state.app.collapsed)
@@ -27,7 +28,7 @@ const router = useRouter()
   * 递归过滤二级菜单及以下的 hidden 掉的路由
   */
 const filterHiddenRoutes = (item: RouteRecordRaw) => {
-  if (item.meta.hidden) {
+  if (item?.meta?.hidden) {
     return false
   } else {
     item.children = item.children?.filter(filterHiddenRoutes)
@@ -39,7 +40,7 @@ const filterHiddenRoutes = (item: RouteRecordRaw) => {
  */
 const routes = router.options.routes
   // 过滤掉登录页等其他 layout 之外的路由
-  .filter(item => item.children?.length > 0)
+  .filter(item => (item?.children?.length ?? 0) > 0)
   // 递归过滤掉 meta.hidden === true 的路由
   .filter(filterHiddenRoutes)
 
@@ -47,14 +48,14 @@ const routes = router.options.routes
  * 高亮当前菜单
  */
 const route = useRoute()
-const currentRoute = ref<string[]>([])
-const openKeys = ref<string[]>([])
-const preOpenKeys = ref<string>([])
+const currentRoute = ref<RouteRecordName[]>([])
+const openKeys = ref<RouteRecordName[]>([])
+const preOpenKeys = ref<RouteRecordName[]>([])
 
 watch(() => route.fullPath, () => {
-  currentRoute.value = [route.name]
+  currentRoute.value = [route?.name ?? '']
   if (openKeys.value.length === 0) {
-    openKeys.value =  [route.matched[0]?.name]
+    openKeys.value =  [route.matched[0]?.name ?? '']
   }
 }, { immediate: true })
 
@@ -74,7 +75,7 @@ watch(collapsed, value => {
 /**
  * 点击菜单跳转路由
  */
-const handleClickMenu = (menuInfo) => {
+const handleClickMenu = (menuInfo: { key: RouteRecordName }) => {
   router.push({ name: menuInfo.key })
 }
 
