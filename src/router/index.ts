@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import useToken from '../hooks/useToken'
 import store from '@/store'
 import routes from './routes'
