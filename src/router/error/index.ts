@@ -20,6 +20,13 @@ const error: RouteRecordRaw[] = [
         component: () =>
           import(/* webpackChunkName: "Error403" */ '@/views/error/403.vue'),
       },
+      {
+        path: '404',
+        name: 'Error404',
+        meta: { title: '404' },
+        component: () =>
+          import(/* webpackChunkName: "Error404" */ '@/views/error/404.vue'),
+      },
     ],
   },
 ]
