@@ -1,0 +1,138 @@
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-wrapper > .wrapper {
+  width: 250px;
+  height: 250px;
+  text-align: center;
+}
+
+.loading-wrapper > .wrapper > .loading-text {
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.loading-wrapper > .wrapper > p {
+  position: relative;
+  margin-top: -3%;
+  z-index: 5;
+  width: 245px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.perp {
+  border-radius: 200px;
+  width: 250px;
+  height: 250px;
+  -webkit-animation: rotating 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -moz-animation: rotating 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -o-animation: rotating 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -ms-transition: rotating 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  animation: rotating 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -webkit-transition: all 400ms ease-out;
+  -moz-transition: all 400ms ease-out;
+  -o-transition: all 400ms ease-out;
+  transition: all 400ms ease-out;
+  border: 1px outset white;
+}
+
+#p2 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -222px;
+  background-color: transparent;
+  width: 190px;
+  height: 190px;
+  border: 1px inset white;
+  z-index: 5;
+  -webkit-animation: rotatingback 2s cubic-bezier(0.17, 0.67, 0.31, 0.95)
+    infinite;
+  -moz-animation: rotatingback 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -o-animation: rotatingback 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -ms-transition: rotatingback 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  animation: rotatingback 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+}
+
+#p3 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -162px;
+  background-color: transparent;
+  width: 130px;
+  height: 130px;
+  border: 1px inset white;
+  z-index: 5;
+  -webkit-animation: rotating2 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -moz-animation: rotating2 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -o-animation: rotating2 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  -ms-transition: rotating2 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+  animation: rotating2 2s cubic-bezier(0.17, 0.67, 0.31, 0.95) infinite;
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rotatingback {
+  from {
+    -webkit-transform: rotate(100deg);
+  }
+  to {
+    -webkit-transform: rotate(-260deg);
+  }
+}
+
+@-webkit-keyframes rotating2 {
+  from {
+    -webkit-transform: rotate(110deg);
+  }
+  to {
+    -webkit-transform: rotate(470deg);
+  }
+}
+
+@-moz-keyframes rotating2 {
+  from {
+    -moz-transform: rotate(110deg);
+  }
+  to {
+    -moz-transform: rotate(470deg);
+  }
+}
+
+@-o-keyframes rotating2 {
+  from {
+    -o-transform: rotate(110deg);
+  }
+  to {
+    -o-transform: rotate(470deg);
+  }
+}
+
+@-ms-keyframes rotating2 {
+  from {
+    -ms-transform: rotate(110deg);
+  }
+  to {
+    -ms-transform: rotate(470deg);
+  }
+}
+
+@keyframes rotating2 {
+  from {
+    transform: rotate(110deg);
+  }
+  to {
+    transform: rotate(470deg);
+  }
+}
