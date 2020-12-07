@@ -1,0 +1,4 @@
+
+#nprogress .bar {
+  background: var(--antd-wave-shadow-color);
+}

@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import useToken from '../hooks/useToken'
 import store from '@/store'
 import routes from './routes'
+import NProgress from 'nprogress'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -10,6 +11,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   store.commit('app/SET_SPINNING', true) // 切换路由时打开 spinning
+  NProgress.start()
   // 获取 store 里的 token
   const token = useToken()
   if (token) {
@@ -36,6 +38,7 @@ router.beforeEach(async (to, from, next) => {
 
 router.afterEach(() => {
   store.commit('app/SET_SPINNING', false)
+  NProgress.done()
 })
 
 export default router
