@@ -55,6 +55,7 @@ const actions: ActionTree<UserState, RootState> = {
   async Logout({ commit }) {
     removeToken()
     commit('SET_TOKEN', '')
+    router.push('/login')
     return
   },
 }

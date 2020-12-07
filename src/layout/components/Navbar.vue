@@ -5,25 +5,62 @@
       :class="[collapsed ? 'collapsed' : '']"
       @click="toggle"
     />
-    <div class="user-info">
-      <div class="avatar">
-        <a-avatar
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        />
+    <a-dropdown>
+      <div class="user-info">
+        <div class="avatar">
+          <a-avatar
+            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          />
+        </div>
+        <div class="username">{{ userName }}</div>
+        <DownOutlined />
       </div>
-      <div class="username">{{ userName }}</div>
-    </div>
+      <template #overlay>
+        <a-menu>
+          <a-menu-item key="0">
+            <div class="link" @click="goto('/home')">
+              <DashboardOutlined /> 首页
+            </div>
+          </a-menu-item>
+          <a-menu-item key="1">
+            <div class="link" @click="goto('/account/settings')">
+              <SettingOutlined /> 个人设置
+            </div>
+          </a-menu-item>
+          <a-menu-divider />
+          <a-menu-item key="3">
+            <div class="link" @click="handleLogout">
+              <LogoutOutlined /> 退出登录
+            </div>
+          </a-menu-item>
+        </a-menu>
+      </template>
+    </a-dropdown>
   </div>
 </template>
 <script setup lang="ts">
-import { MenuFoldOutlined } from '@ant-design/icons-vue'
+import {
+  MenuFoldOutlined,
+  DownOutlined,
+  DashboardOutlined,
+  SettingOutlined,
+  LogoutOutlined,
+} from '@ant-design/icons-vue'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 const store = useStore()
 const userName = computed<string>(() => store.state.user.userInfo.name)
 
 const collapsed = computed<boolean>(() => store.state.app.collapsed)
 const toggle = () => store.commit('app/TOGGLE_COLLAPSE')
+
+// 跳转路由
+const router = useRouter()
+const goto = (path: strting) => router.push(path)
+
+// 退出登录
+const handleLogout = () => store.dispatch('user/Logout')
 </script>
 <style lang="scss" scoped>
 .navbar {
@@ -36,6 +73,9 @@ const toggle = () => store.commit('app/TOGGLE_COLLAPSE')
 .user-info {
   display: flex;
   align-items: center;
+  .username {
+    margin-right: 5px;
+  }
 }
 .toggle {
   font-size: 20px;
@@ -44,5 +84,8 @@ const toggle = () => store.commit('app/TOGGLE_COLLAPSE')
 }
 .collapsed {
   transform: rotate(180deg);
+}
+.link {
+  padding: 0 10px;
 }
 </style>
