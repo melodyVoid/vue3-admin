@@ -8,7 +8,7 @@ const account: RouteRecordRaw[] = [
     name: 'Account',
     component: () =>
       import(/* webpackChunkName: "Layout" */ '@/layout/index.vue'),
-    meta: { title: '我的' },
+    meta: { title: '我的', icon: '我的' },
     children: [
       {
         path: 'settings',

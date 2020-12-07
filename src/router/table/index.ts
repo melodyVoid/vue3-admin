@@ -8,7 +8,7 @@ const table: RouteRecordRaw[] = [
     name: 'Table',
     component: () =>
       import(/* webpackChunkName: "Layout" */ '@/layout/index.vue'),
-    meta: { title: '表格' },
+    meta: { title: '表格', icon: '表格' },
     children: [
       {
         path: 'basic',

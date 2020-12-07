@@ -2,7 +2,11 @@
   <template v-if="menu.children && menu.children.length > 0">
     <a-sub-menu>
       <template #title>
-        <MailOutlined />
+        <SvgIcon
+          :name="menu?.meta?.icon ?? 'default'"
+          className="anticon"
+          v-if="menu?.meta?.icon"
+        ></SvgIcon>
         <span>{{ menu.meta?.title }}</span>
       </template>
       <MenuItem
@@ -13,7 +17,7 @@
     </a-sub-menu>
   </template>
   <a-menu-item v-else :key="menu.name">
-    <PieChartOutlined />
+    <!-- <SvgIcon :name="menu?.meta?.icon ?? 'default'"></SvgIcon> -->
     <span>{{ menu.meta?.title }}</span>
   </a-menu-item>
 </template>
@@ -27,6 +31,7 @@ import { defineProps } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { PieChartOutlined, MailOutlined } from '@ant-design/icons-vue'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 
 const props = defineProps({
   menu: {

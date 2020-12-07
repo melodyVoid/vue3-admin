@@ -25,5 +25,6 @@ const iconName = computed(() => `#icon-${props.name}`)
   font-size: 1em;
   fill: currentColor;
   overflow: hidden;
+  margin-right: 10px;
 }
 </style>
