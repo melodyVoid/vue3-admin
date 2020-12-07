@@ -1,5 +1,6 @@
-import { RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw, RouterView } from 'vue-router'
 import { defineComponent, h } from 'vue'
+import Footer from '@/layout/components/Footer.vue'
 const error: RouteRecordRaw[] = [
   {
     path: '/error',
@@ -8,7 +9,7 @@ const error: RouteRecordRaw[] = [
     // 全屏页面
     component: defineComponent({
       setup() {
-        return () => h('router-view')
+        return () => h('div', [h(RouterView), h(Footer)])
       },
     }),
     children: [
