@@ -18,15 +18,17 @@ const table: RouteRecordRaw[] = [
           import(
             /* webpackChunkName: "TableBasic" */ '@/views/table/basic/index.vue'
           ),
-      },
-      {
-        path: 'basic1',
-        name: 'TableBasic1',
-        meta: { title: '基础表格1', hidden: true },
-        component: () =>
-          import(
-            /* webpackChunkName: "TableBasic" */ '@/views/table/basic/index.vue'
-          ),
+        children: [
+          {
+            path: 'basic1',
+            name: 'TableBasic1',
+            meta: { title: '基础表格1' },
+            component: () =>
+              import(
+                /* webpackChunkName: "TableBasic" */ '@/views/table/basic/index.vue'
+              ),
+          },
+        ],
       },
     ],
   },

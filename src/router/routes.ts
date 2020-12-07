@@ -8,6 +8,10 @@ import table from './table'
  * Demo
  */
 import demo from './demo'
-const routes: RouteRecordRaw[] = [...common, ...table, ...demo]
+/**
+ * 我的
+ */
+import account from './account'
+const routes: RouteRecordRaw[] = [...common, ...table, ...demo, ...account]
 
 export default routes
