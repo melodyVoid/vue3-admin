@@ -102,7 +102,7 @@ const handleLogout = () => store.dispatch('user/Logout')
 .navbar {
   padding: 0 20px;
   display: grid;
-  grid-template-columns: 40px auto 200px;
+  grid-template-columns: 30px auto 200px;
   align-items: center;
   border-bottom: 1px solid #f6f6f6;
 }
@@ -117,7 +117,8 @@ const handleLogout = () => store.dispatch('user/Logout')
 .toggle {
   font-size: 20px;
   cursor: pointer;
-  transition: transform ease 0.4s;
+  transition: transform ease 0.3s;
+  width: 20px;
 }
 .collapsed {
   transform: rotate(180deg);
