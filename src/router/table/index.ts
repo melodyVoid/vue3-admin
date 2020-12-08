@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
+import Layout from '@/layout/index.vue'
 /**
  * 表格
  */
@@ -8,8 +9,7 @@ const table: RouteRecordRaw[] = [
     name: 'Table',
     redirect: { name: 'TableBasic' },
     meta: { title: '表格', icon: '表格' },
-    component: () =>
-      import(/* webpackChunkName: "Layout" */ '@/layout/index.vue'),
+    component: Layout,
     children: [
       {
         path: 'basic',

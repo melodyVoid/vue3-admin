@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
+import Layout from '@/layout/index.vue'
 /**
  * 我的
  */
@@ -8,8 +9,7 @@ const account: RouteRecordRaw[] = [
     name: 'Account',
     redirect: { name: 'AccountSettings' },
     meta: { title: '我的', icon: '我的' },
-    component: () =>
-      import(/* webpackChunkName: "Layout" */ '@/layout/index.vue'),
+    component: Layout,
     children: [
       {
         path: 'settings',
