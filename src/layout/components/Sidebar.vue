@@ -96,5 +96,6 @@ useCssVars(() => ({
 .sidebar {
   width: var(--sidebarWidth);
   transition: 0.4s;
+  grid-area: sidebar;
 }
 </style>
