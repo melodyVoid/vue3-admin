@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
+import Layout from '@/layout/index.vue'
 /**
  * demo
  */
@@ -8,8 +9,7 @@ const demo: RouteRecordRaw[] = [
     name: 'Demo',
     redirect: { name: 'DemoBasic' },
     meta: { title: 'Demo', icon: 'default' },
-    component: () =>
-      import(/* webpackChunkName: "Layout" */ '@/layout/index.vue'),
+    component: Layout,
     children: [
       {
         path: 'basic',
