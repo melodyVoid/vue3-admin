@@ -10,7 +10,10 @@
         v-for="routeItem of [home, ...routeMatched]"
         :key="routeItem.name"
       >
-        <span>{{ routeItem?.meta?.title }}</span>
+        <a v-if="routeItem?.children?.length > 0">{{
+          routeItem?.meta?.title
+        }}</a>
+        <span v-else>{{ routeItem?.meta?.title }}</span>
         <template #overlay v-if="routeItem?.children?.length > 0">
           <a-menu>
             <a-menu-item
