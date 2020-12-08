@@ -6,13 +6,15 @@ const table: RouteRecordRaw[] = [
   {
     path: '/table',
     name: 'Table',
+    redirect: { name: 'TableBasic' },
+    meta: { title: '表格', icon: '表格' },
     component: () =>
       import(/* webpackChunkName: "Layout" */ '@/layout/index.vue'),
-    meta: { title: '表格', icon: '表格' },
     children: [
       {
         path: 'basic',
         name: 'TableBasic',
+        redirect: '/table/basic/basic1',
         meta: { title: '基础表格' },
         component: () =>
           import(
@@ -29,6 +31,15 @@ const table: RouteRecordRaw[] = [
               ),
           },
         ],
+      },
+      {
+        path: 'basic2',
+        name: 'TableBasic2',
+        meta: { title: '基础表格2', hidden: false },
+        component: () =>
+          import(
+            /* webpackChunkName: "TableBasic" */ '@/views/table/basic/index.vue'
+          ),
       },
     ],
   },

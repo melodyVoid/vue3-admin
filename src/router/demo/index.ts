@@ -6,9 +6,10 @@ const demo: RouteRecordRaw[] = [
   {
     path: '/demo',
     name: 'Demo',
+    redirect: { name: 'DemoBasic' },
+    meta: { title: 'Demo', icon: 'default' },
     component: () =>
       import(/* webpackChunkName: "Layout" */ '@/layout/index.vue'),
-    meta: { title: 'Demo', icon: 'default' },
     children: [
       {
         path: 'basic',

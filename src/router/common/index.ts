@@ -14,16 +14,17 @@ const common: RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'Layout',
+    redirect: { name: 'Dashboard' },
+    meta: { title: '系统看板', icon: 'dashboard', hidden: false },
     component: () =>
       import(/* webpackChunkName: "layout" */ '@/layout/index.vue'),
-    meta: { title: '首页父', hidden: true },
     children: [
       {
         path: '',
         name: 'Dashboard',
+        meta: { title: '首页' },
         component: () =>
           import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
-        meta: { title: '首页' },
       },
     ],
   },

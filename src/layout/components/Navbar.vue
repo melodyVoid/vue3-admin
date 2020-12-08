@@ -5,6 +5,29 @@
       :class="[collapsed ? 'collapsed' : '']"
       @click="toggle"
     />
+    <a-breadcrumb>
+      <a-breadcrumb-item
+        v-for="routeItem of [home, ...routeMatched]"
+        :key="routeItem.name"
+      >
+        <a v-if="routeItem?.children?.length > 0">{{
+          routeItem?.meta?.title
+        }}</a>
+        <span v-else>{{ routeItem?.meta?.title }}</span>
+        <template #overlay v-if="routeItem?.children?.length > 0">
+          <a-menu>
+            <a-menu-item
+              v-for="item of routeItem.children.filter(i => !i?.meta?.hidden)"
+              :key="item.name"
+            >
+              <router-link :to="{ name: item.name }">{{
+                item?.meta?.title
+              }}</router-link>
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-breadcrumb-item>
+    </a-breadcrumb>
     <a-dropdown>
       <div class="user-info">
         <div class="avatar">
@@ -48,7 +71,7 @@ import {
 } from '@ant-design/icons-vue'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 const store = useStore()
 const userName = computed<string>(() => store.state.user.userInfo.name)
 
@@ -59,20 +82,34 @@ const toggle = () => store.commit('app/TOGGLE_COLLAPSE')
 const router = useRouter()
 const goto = (path: strting) => router.push(path)
 
+// 面包屑
+const route = useRoute()
+const routeMatched = computed(() => route.matched)
+const rootRoutes = router.options.routes
+  .filter(item => item?.children?.length > 0)
+  .filter(item => !item?.meta?.hidden)
+// 面包屑第一项
+const home = {
+  name: rootRoutes[0]?.name,
+  meta: { title: '首页' },
+  children: rootRoutes,
+}
+
 // 退出登录
 const handleLogout = () => store.dispatch('user/Logout')
 </script>
 <style lang="scss" scoped>
 .navbar {
   padding: 0 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 40px auto 200px;
   align-items: center;
-  justify-content: space-between;
   border-bottom: 1px solid #f6f6f6;
 }
 .user-info {
   display: flex;
   align-items: center;
+  justify-self: end;
   .username {
     margin-right: 5px;
   }
