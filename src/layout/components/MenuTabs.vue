@@ -31,20 +31,20 @@ const store = useStore()
  * 提取部分路由信息
  */
 const menuTab = (route: RouteLocationNormalized): MenuTabRaw => ({
-  name: route.name,
+  name: route.name ?? '',
   meta: route.meta,
 })
 /**
  * 高亮的tab
  */
-const activeKey = ref<string | symbol>(route.name)
+const activeKey = ref<string | symbol>(route?.name ?? '')
 // 缓存被删除的 tabKey，用于在下面 watchEffect 的时候不向 mentTabs 里 push 数据
 const removeKey = ref<string | symbol>('')
 
-const menuTabs = computed(() => store.state.app.menuTabs)
+const menuTabs = computed<MenuTabRaw[]>(() => store.state.app.menuTabs)
 
 watchEffect(() => {
-  activeKey.value = route.name
+  activeKey.value = route.name ?? ''
   if (route.name === 'Dashboard' || route.name === removeKey.value) {
     // 这里要清空一下，不然下次点击 removeKey 对应的菜单时不会向 menuTabs 里添加数据
     removeKey.value = ''
