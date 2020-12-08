@@ -6,7 +6,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import SvgIcon from '@/components/SvgIcon/index'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 import useGoBack from '@/hooks/useGoBack'
 const { goBack } = useGoBack()
 </script>
