@@ -6,9 +6,10 @@ const account: RouteRecordRaw[] = [
   {
     path: '/account',
     name: 'Account',
+    redirect: { name: 'AccountSettings' },
+    meta: { title: '我的', icon: '我的' },
     component: () =>
       import(/* webpackChunkName: "Layout" */ '@/layout/index.vue'),
-    meta: { title: '我的', icon: '我的' },
     children: [
       {
         path: 'settings',
