@@ -54,13 +54,13 @@ const preOpenKeys = ref<RouteRecordName[]>([])
 
 watch(() => route.fullPath, () => {
   currentRoute.value = [route?.name ?? '']
-  // 避免切换路由时，侧边栏总是折叠起来
-  console.log(route.matched)
-  if (openKeys.value.length === 0) {
-    // openKeys.value =  [route.matched[0]?.name ?? '']
-    // 解决三级或更多级路由刷新页面后菜单展开不正确的 bug
-    openKeys.value = [...route.matched.map(item => item?.name ?? '').slice(0, -1)]
-  }
+  /**
+   * ...openKeys.value  解决切换路由时，侧边栏总折起来的效果（类似手风琴）
+   * ...route.matched.map(item => item?.name ?? '').slice(0, -1) 解决三级或更多级路由刷新页面后菜单展开不正确的 bug
+   * 然后再对数组去重
+   */
+  openKeys.value = [...new Set([...openKeys.value, ...route.matched.map(item => item?.name ?? '').slice(0, -1)])]
+  console.log(openKeys.value, 'dddd')
 }, { immediate: true })
 
 /**

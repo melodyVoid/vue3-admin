@@ -16,7 +16,7 @@ const common: RouteRecordRaw[] = [
     name: 'Layout',
     component: () =>
       import(/* webpackChunkName: "layout" */ '@/layout/index.vue'),
-    meta: { title: '首页父', hidden: true },
+    meta: { title: '系统看板', icon: 'dashboard', hidden: false },
     children: [
       {
         path: '',
