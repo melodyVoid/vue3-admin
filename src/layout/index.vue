@@ -3,6 +3,7 @@
     <Logo></Logo>
     <Navbar></Navbar>
     <Sidebar></Sidebar>
+    <MenuTabs></MenuTabs>
     <Main></Main>
   </div>
 </template>
@@ -10,6 +11,7 @@
 import Logo from './components/Logo.vue'
 import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar.vue'
+import MenuTabs from './components/MenuTabs.vue'
 import Main from './components/Main.vue'
 </script>
 <style lang="scss" scoped>
@@ -23,9 +25,10 @@ import Main from './components/Main.vue'
 
   // 加上折叠的过度效果的解决办法是：将第一列的宽度设置为 auto，然后去动态地改变 sidebar 的宽度
   grid-template-columns: auto 1fr;
-  grid-template-rows: 64px auto;
+  grid-template-rows: 64px 50px auto;
   grid-template-areas:
     'logo navbar'
+    'sidebar tabs'
     'sidebar main';
 }
 </style>

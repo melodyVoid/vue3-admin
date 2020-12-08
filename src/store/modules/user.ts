@@ -1,4 +1,4 @@
-import { getToken, setToken, removeToken } from '@/utils/local-stroage'
+import { getToken, setToken, removeToken } from '@/utils/local-storage'
 import { MutationTree, Module, ActionTree } from 'vuex'
 import { RootState } from '../index'
 import { LoginFormData } from '@/views/login/hooks/useLogin'
