@@ -6,6 +6,7 @@
       hide-add
       @change="handleChangeMenuTab"
     >
+      <a-tab-pane key="Dashboard" tab="首页" :closable="false"></a-tab-pane>
       <a-tab-pane
         v-for="item of menuTabs"
         :key="item.name"
@@ -40,10 +41,13 @@ const activeKey = ref<string | symbol>(route.name)
 const menuTabs = computed(() => store.state.app.menuTabs)
 
 watchEffect(() => {
+  activeKey.value = route.name
+  if (route.name === 'Dashboard') {
+    return
+  }
   if (menuTabs.value.find(item => item.name === route.name) === undefined) {
     store.commit('app/SET_MENU_TABS', [...menuTabs.value, menuTab(route)])
   }
-  activeKey.value = route.name
 })
 
 const handleChangeMenuTab = (activeKey: string) => {
