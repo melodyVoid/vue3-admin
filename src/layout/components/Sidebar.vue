@@ -60,7 +60,6 @@ watch(() => route.fullPath, () => {
    * 然后再对数组去重
    */
   openKeys.value = [...new Set([...openKeys.value, ...route.matched.map(item => item?.name ?? '').slice(0, -1)])]
-  console.log(openKeys.value, 'dddd')
 }, { immediate: true })
 
 /**

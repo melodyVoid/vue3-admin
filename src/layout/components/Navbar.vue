@@ -6,23 +6,24 @@
       @click="toggle"
     />
     <a-breadcrumb>
-      <template v-for="routeItem of routeMatched" :key="routeItem.name">
-        <a-breadcrumb-item>
-          <a>{{ routeItem?.meta?.title }}</a>
-          <template #overlay v-if="routeItem?.children?.length > 0">
-            <a-menu>
-              <a-menu-item
-                v-for="item of routeItem.children.filter(i => !i?.meta?.hidden)"
-                :key="item.name"
-              >
-                <router-link :to="{ name: item.name }">{{
-                  item?.meta?.title
-                }}</router-link>
-              </a-menu-item>
-            </a-menu>
-          </template>
-        </a-breadcrumb-item>
-      </template>
+      <a-breadcrumb-item
+        v-for="routeItem of [home, ...routeMatched]"
+        :key="routeItem.name"
+      >
+        <span>{{ routeItem?.meta?.title }}</span>
+        <template #overlay v-if="routeItem?.children?.length > 0">
+          <a-menu>
+            <a-menu-item
+              v-for="item of routeItem.children.filter(i => !i?.meta?.hidden)"
+              :key="item.name"
+            >
+              <router-link :to="{ name: item.name }">{{
+                item?.meta?.title
+              }}</router-link>
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-breadcrumb-item>
     </a-breadcrumb>
     <a-dropdown>
       <div class="user-info">
@@ -74,12 +75,22 @@ const userName = computed<string>(() => store.state.user.userInfo.name)
 const collapsed = computed<boolean>(() => store.state.app.collapsed)
 const toggle = () => store.commit('app/TOGGLE_COLLAPSE')
 
-// 面包屑
-const route = useRoute()
-const routeMatched = computed(() => route.matched)
 // 跳转路由
 const router = useRouter()
 const goto = (path: strting) => router.push(path)
+
+// 面包屑
+const route = useRoute()
+const routeMatched = computed(() => route.matched)
+const rootRoutes = router.options.routes
+  .filter(item => item?.children?.length > 0)
+  .filter(item => !item?.meta?.hidden)
+// 面包屑第一项
+const home = {
+  name: rootRoutes[0]?.name,
+  meta: { title: '首页' },
+  children: rootRoutes,
+}
 
 // 退出登录
 const handleLogout = () => store.dispatch('user/Logout')
