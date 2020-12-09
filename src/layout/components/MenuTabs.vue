@@ -14,12 +14,37 @@
         :tab="item.meta.title"
       ></a-tab-pane>
     </a-tabs>
+    <a-dropdown>
+      <a>更多操作 <DownOutlined /></a>
+      <template #overlay>
+        <a-menu>
+          <a-menu-item key="0" @click="handleRefreshCurrentPage"
+            ><ReloadOutlined /> 刷新页面</a-menu-item
+          >
+          <a-menu-divider />
+          <a-menu-item key="1" @click="handleCloseCurrentPage"
+            ><CloseOutlined /> 关闭页面</a-menu-item
+          >
+          <a-menu-divider />
+
+          <a-menu-item key="2" @click="handleCloseOtherPages"
+            ><SvgIcon name="close-others" /> 关闭其他</a-menu-item
+          >
+          <a-menu-divider />
+          <a-menu-item key="3" @click="handleCloseAllPages"
+            ><StopOutlined /> 关闭所有</a-menu-item
+          >
+        </a-menu>
+      </template>
+    </a-dropdown>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, watchEffect, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { DownOutlined, ReloadOutlined, CloseOutlined, StopOutlined } from '@ant-design/icons-vue'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 import type { MenuTabRaw } from '@/store/modules/app'
 import type { RouteLocationNormalized } from 'vue-router'
 
@@ -65,10 +90,11 @@ const handleChangeMenuTab = (activeKey: string) => {
 /**
  * 关闭 tab
  */
-const handleCloseMenuTab = (targetKey: string, action: 'remove' | 'add') => {
-  // 缓存 removeKey
-  removeKey.value = targetKey
+const handleCloseMenuTab = (targetKey: string | symbol, action: 'remove' | 'add') => {
+
   if (action === 'remove') {
+    // 缓存 removeKey
+    removeKey.value = targetKey
     const targetIndex = menuTabs.value.findIndex(item => item.name === targetKey)
     const leftTabs = menuTabs.value.slice(0, targetIndex)
     const rightTabs = menuTabs.value.slice(targetIndex + 1)
@@ -83,7 +109,37 @@ const handleCloseMenuTab = (targetKey: string, action: 'remove' | 'add') => {
     }
     store.commit('app/SET_MENU_TABS', tabs)
   }
+}
 
+/**
+ * 刷新当前页面
+ */
+const handleRefreshCurrentPage = () => {
+  console.log('refresh')
+
+}
+/**
+ * 关闭当前页面
+ */
+const handleCloseCurrentPage = () => {
+  handleCloseMenuTab(activeKey.value, 'remove')
+}
+
+/**
+ * 关闭其他页面
+ */
+const handleCloseOtherPages = () => {
+  const currentMenuTab = menuTabs.value.find(item => item.name === activeKey.value)
+  store.commit('app/SET_MENU_TABS', [currentMenuTab])
+}
+
+/**
+ * 关闭所有页面
+ */
+const handleCloseAllPages = () => {
+  router.push({ name: 'Dashboard' })
+  removeKey.value = activeKey.value
+  store.commit('app/SET_MENU_TABS', [])
 }
 </script>
 <style lang="scss" scoped>
@@ -91,6 +147,9 @@ const handleCloseMenuTab = (targetKey: string, action: 'remove' | 'add') => {
   grid-area: tabs;
   padding: 0 20px;
   align-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   ::v-deep(.ant-tabs-bar.ant-tabs-top-bar.ant-tabs-card-bar) {
     margin-bottom: 0;
   }
