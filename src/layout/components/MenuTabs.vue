@@ -107,6 +107,9 @@ const handleCloseMenuTab = (targetKey: string | symbol, action: 'remove' | 'add'
       } else {
         router.push({ name: tabs[tabs.length - 1].name })
       }
+    } else {
+      // 如果关闭的不是当前页，重置 removeKey，要不然会添加不上 removeKey 所对应的菜单到 menuTabs
+      removeKey.value = ''
     }
     store.commit('app/SET_MENU_TABS', tabs)
   }
