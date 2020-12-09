@@ -43,6 +43,7 @@
 import { ref, watchEffect, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { useReloadRouterView } from '@/hooks/useReloadRouterView'
 import { DownOutlined, ReloadOutlined, CloseOutlined, StopOutlined } from '@ant-design/icons-vue'
 import SvgIcon from '@/components/SvgIcon/index.vue'
 import type { MenuTabRaw } from '@/store/modules/app'
@@ -114,9 +115,9 @@ const handleCloseMenuTab = (targetKey: string | symbol, action: 'remove' | 'add'
 /**
  * 刷新当前页面
  */
+const { reloadRouterView } = useReloadRouterView()
 const handleRefreshCurrentPage = () => {
-  console.log('refresh')
-
+  reloadRouterView()
 }
 /**
  * 关闭当前页面
