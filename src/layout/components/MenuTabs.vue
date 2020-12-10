@@ -40,15 +40,18 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { MenuTabRaw } from '@/store/modules/app'
+import type { RouteLocationNormalized } from 'vue-router'
+
 import { ref, watchEffect, computed } from 'vue'
+import { message } from 'ant-design-vue'
+
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { useReloadRouterView } from '@/hooks/useReloadRouterView'
+
 import { DownOutlined, ReloadOutlined, CloseOutlined, StopOutlined } from '@ant-design/icons-vue'
 import SvgIcon from '@/components/SvgIcon/index.vue'
-import type { MenuTabRaw } from '@/store/modules/app'
-import type { RouteLocationNormalized } from 'vue-router'
-import { message } from 'ant-design-vue'
 
 const route = useRoute()
 const router = useRouter()

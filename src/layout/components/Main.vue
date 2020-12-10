@@ -11,15 +11,16 @@
   </main>
 </template>
 <script setup lang="ts">
-import Footer from './Footer.vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useReloadRouterView } from '@/hooks/useReloadRouterView'
+
+import Footer from './Footer.vue'
+
 const store = useStore()
 const spinning = computed(() => store.state.app.spinning)
 
 const { routerViewActive } = useReloadRouterView()
-console.log(routerViewActive)
 </script>
 <style lang="scss" scoped>
 main {

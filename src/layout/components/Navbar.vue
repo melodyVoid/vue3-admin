@@ -62,6 +62,11 @@
   </div>
 </template>
 <script setup lang="ts">
+import { computed } from 'vue'
+
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+
 import {
   MenuFoldOutlined,
   DownOutlined,
@@ -69,9 +74,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
 } from '@ant-design/icons-vue'
-import { useStore } from 'vuex'
-import { computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+
 const store = useStore()
 const userName = computed<string>(() => store.state.user.userInfo.name)
 
@@ -80,13 +83,13 @@ const toggle = () => store.commit('app/TOGGLE_COLLAPSE')
 
 // 跳转路由
 const router = useRouter()
-const goto = (path: strting) => router.push(path)
+const goto = (path: string) => router.push(path)
 
 // 面包屑
 const route = useRoute()
 const routeMatched = computed(() => route.matched)
 const rootRoutes = router.options.routes
-  .filter(item => item?.children?.length > 0)
+  .filter(item => item?.children?.length ?? 0 > 0)
   .filter(item => !item?.meta?.hidden)
 // 面包屑第一项
 const home = {

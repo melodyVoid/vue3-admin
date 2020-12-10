@@ -13,12 +13,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import MenuItem from './MenuItem.vue'
-import { useRouter, useRoute } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import { ref, computed, useCssVars, watch, watchEffect } from 'vue'
-import { useStore } from 'vuex'
 export type RouteRecordName = string | symbol
+
+import { ref, computed, useCssVars, watch, watchEffect } from 'vue'
+
+import { useRouter, useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+
+import MenuItem from './MenuItem.vue'
 
 const store = useStore()
 const collapsed = computed(() => store.state.app.collapsed)
