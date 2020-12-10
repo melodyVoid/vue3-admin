@@ -21,7 +21,7 @@ export function provideReloadRouterView() {
 }
 
 export function useReloadRouterView() {
-  const reloadRouterView = inject(reloadSymbol)
+  const reloadRouterView = inject<() => Promise<void>>(reloadSymbol)
   if (!reloadRouterView) {
     throw new Error('reloadRouterView is undefined')
   }

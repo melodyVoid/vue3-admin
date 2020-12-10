@@ -48,10 +48,13 @@ import { DownOutlined, ReloadOutlined, CloseOutlined, StopOutlined } from '@ant-
 import SvgIcon from '@/components/SvgIcon/index.vue'
 import type { MenuTabRaw } from '@/store/modules/app'
 import type { RouteLocationNormalized } from 'vue-router'
+import { message } from 'ant-design-vue'
 
 const route = useRoute()
 const router = useRouter()
 const store = useStore()
+
+const HOME = 'Dashboard'
 
 /**
  * 提取部分路由信息
@@ -71,7 +74,7 @@ const menuTabs = computed<MenuTabRaw[]>(() => store.state.app.menuTabs)
 
 watchEffect(() => {
   activeKey.value = route.name ?? ''
-  if (route.name === 'Dashboard' || route.name === removeKey.value) {
+  if (route.name === HOME || route.name === removeKey.value) {
     // 这里要清空一下，不然下次点击 removeKey 对应的菜单时不会向 menuTabs 里添加数据
     removeKey.value = ''
     return
@@ -103,10 +106,13 @@ const handleCloseMenuTab = (targetKey: string | symbol, action: 'remove' | 'add'
     // 如果关闭当前页面
     if (targetKey === activeKey.value) {
       if (tabs.length === 0) {
-        router.push({ name: 'Dashboard' })
+        router.push({ name: HOME })
       } else {
         router.push({ name: tabs[tabs.length - 1].name })
       }
+    } else {
+      // 如果关闭的不是当前页，重置 removeKey，要不然会添加不上 removeKey 所对应的菜单到 menuTabs
+      removeKey.value = ''
     }
     store.commit('app/SET_MENU_TABS', tabs)
   }
@@ -123,6 +129,11 @@ const handleRefreshCurrentPage = () => {
  * 关闭当前页面
  */
 const handleCloseCurrentPage = () => {
+  // 如果当前页面是首页的话就不关闭
+  if (activeKey.value === HOME) {
+    message.warning('首页不能被关闭')
+    return
+  }
   handleCloseMenuTab(activeKey.value, 'remove')
 }
 
@@ -131,14 +142,15 @@ const handleCloseCurrentPage = () => {
  */
 const handleCloseOtherPages = () => {
   const currentMenuTab = menuTabs.value.find(item => item.name === activeKey.value)
-  store.commit('app/SET_MENU_TABS', [currentMenuTab])
+  // currentMenuTab === undefined 说明是在首页，将 menuTabs 置成空数组即可
+  store.commit('app/SET_MENU_TABS', currentMenuTab === undefined ? [] : [currentMenuTab])
 }
 
 /**
  * 关闭所有页面
  */
 const handleCloseAllPages = () => {
-  router.push({ name: 'Dashboard' })
+  router.push({ name: HOME })
   removeKey.value = activeKey.value
   store.commit('app/SET_MENU_TABS', [])
 }
