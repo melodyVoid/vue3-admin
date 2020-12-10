@@ -142,7 +142,8 @@ const handleCloseCurrentPage = () => {
  */
 const handleCloseOtherPages = () => {
   const currentMenuTab = menuTabs.value.find(item => item.name === activeKey.value)
-  store.commit('app/SET_MENU_TABS', [currentMenuTab])
+  // currentMenuTab === undefined 说明是在首页，将 menuTabs 置成空数组即可
+  store.commit('app/SET_MENU_TABS', currentMenuTab === undefined ? [] : [currentMenuTab])
 }
 
 /**
