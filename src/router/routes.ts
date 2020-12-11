@@ -17,8 +17,8 @@ const routes: RouteRecordRaw[] = [
   ...common,
   ...table,
   ...demo,
-  ...account,
   ...error,
+  ...account,
 ]
 
 export default routes
