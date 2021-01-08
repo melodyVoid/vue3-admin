@@ -152,7 +152,7 @@ const handleDelete = (record: any) => {
 const handleChange = (value: string, key: string, column: string) => {
   const target = data.value.find(item => item.key === key)
   if (target) {
-    target[column] = value
+    ;(target as any)[column] = value
   }
 }
 
@@ -161,7 +161,7 @@ const handleEdit = (key: string) => {
   const target = data.value.find(item => item.key === key)
   if (target) {
     editingKey.value = key
-    target.editable = true
+    ;(target as any).editable = true
   }
 }
 
@@ -169,7 +169,7 @@ const handleSave = (key: string) => {
   const target = data.value.find(item => item.key === key)
   const targetCache = cachedData.find(item => item.key === key)
   if (target && targetCache) {
-    target.editable = false
+    ;(target as any).editable = false
     Object.assign(targetCache, target)
   }
   editingKey.value = ''
@@ -179,7 +179,7 @@ const handleCancel = (key: string) => {
   const target = data.value.find(item => item.key === key)
   const targetCache = cachedData.find(item => item.key === key)
   if (target && targetCache) {
-    target.editable = false
+    ;(target as any).editable = false
     Object.assign(target, targetCache)
   }
   editingKey.value = ''
