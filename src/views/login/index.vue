@@ -36,8 +36,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import useLogin from './hooks/useLogin'
+
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 
 const { loginForm, validateInfos, handleSubmit } = useLogin()
 </script>

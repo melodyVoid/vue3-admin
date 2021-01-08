@@ -13,6 +13,12 @@ import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar.vue'
 import MenuTabs from './components/MenuTabs.vue'
 import Main from './components/Main.vue'
+
+/**
+ * 刷新当前页面逻辑，在父组件注入 reloadRouterView 函数
+ */
+import { provideReloadRouterView } from '@/hooks/useReloadRouterView'
+provideReloadRouterView()
 </script>
 <style lang="scss" scoped>
 .layout {

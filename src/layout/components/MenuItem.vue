@@ -27,10 +27,12 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import type { PropType } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
+
+import { defineProps } from 'vue'
 import { PieChartOutlined, MailOutlined } from '@ant-design/icons-vue'
+
 import SvgIcon from '@/components/SvgIcon/index.vue'
 
 const props = defineProps({
