@@ -2,7 +2,7 @@
   <footer>
     <div class="links"></div>
     <div class="copyright">
-      Copyright <CopyrightCircleOutlined /> 2020 占位Copyright
+      Copyright <CopyrightCircleOutlined /> 2020 Vue3-Admin Copyright
     </div>
   </footer>
 </template>
