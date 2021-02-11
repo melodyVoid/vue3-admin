@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     首页
+    <div class="text-lg bg-blue-500">HelloWorld</div>
   </div>
 </template>
 <script lang="ts">
