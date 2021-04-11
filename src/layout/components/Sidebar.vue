@@ -16,7 +16,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 export type RouteRecordName = string | symbol
 
-import { ref, computed, useCssVars, watch, watchEffect } from 'vue'
+import { ref, computed, useCssVars, watch } from 'vue'
 
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'

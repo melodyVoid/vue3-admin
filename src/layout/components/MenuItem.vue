@@ -21,18 +21,13 @@
     <span>{{ menu.meta?.title }}</span>
   </a-menu-item>
 </template>
-<script lang="ts">
-export default {
-  name: 'MenuItem',
-}
-</script>
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 import { defineProps } from 'vue'
-import { PieChartOutlined, MailOutlined } from '@ant-design/icons-vue'
 
+import MenuItem from './MenuItem.vue'
 import SvgIcon from '@/components/SvgIcon/index.vue'
 
 const props = defineProps({

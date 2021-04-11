@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import 'ant-design-vue/dist/antd.less'
 import '@/libs'
+import 'tailwindcss/tailwind.css'
 
 createApp(App)
   .use(store)
