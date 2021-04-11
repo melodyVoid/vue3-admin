@@ -1,4 +1,3 @@
-import { computed } from 'vue';
 <template>
   <div class="logo">
     {{ collapsed ? 'Vue3' : 'Vue3-Admin' }}

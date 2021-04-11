@@ -1,4 +1,6 @@
+const plugin = require('tailwindcss/plugin')
 module.exports = {
+  mode: 'jit',
   purge: ['./public/index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -7,5 +9,11 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addBase }) => {
+      addBase({
+        a: { color: '#1DA57A' },
+      })
+    }),
+  ],
 }

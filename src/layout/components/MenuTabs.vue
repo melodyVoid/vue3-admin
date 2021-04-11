@@ -18,20 +18,32 @@
       <a>更多操作 <DownOutlined /></a>
       <template #overlay>
         <a-menu>
-          <a-menu-item key="0" @click="handleRefreshCurrentPage"
+          <a-menu-item
+            key="0"
+            @click="handleRefreshCurrentPage"
+            class="flex items-center"
             ><ReloadOutlined /> 刷新页面</a-menu-item
           >
           <a-menu-divider />
-          <a-menu-item key="1" @click="handleCloseCurrentPage"
+          <a-menu-item
+            key="1"
+            @click="handleCloseCurrentPage"
+            class="flex items-center"
             ><CloseOutlined /> 关闭页面</a-menu-item
           >
           <a-menu-divider />
 
-          <a-menu-item key="2" @click="handleCloseOtherPages"
+          <a-menu-item
+            key="2"
+            @click="handleCloseOtherPages"
+            class="flex items-center"
             ><SvgIcon name="close-others" /> 关闭其他</a-menu-item
           >
           <a-menu-divider />
-          <a-menu-item key="3" @click="handleCloseAllPages"
+          <a-menu-item
+            key="3"
+            @click="handleCloseAllPages"
+            class="flex items-center"
             ><StopOutlined /> 关闭所有</a-menu-item
           >
         </a-menu>

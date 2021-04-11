@@ -1,4 +1,7 @@
 import * as ls from 'local-storage'
+/**
+ * 生产 key
+ */
 function generateKey(key: string): string {
   const prefix = 'admin-'
   return prefix + key
